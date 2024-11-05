@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { TaskProvider } from './context/TaskContext';
+import AddTaskForm from './components/AddTaskForm';
+import SearchBar from './components/SearchBar';
+import Filter from './components/Filter';
+import TaskList from './components/TaskList';
 
 function App() {
+  const [query, setQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TaskProvider>
+      <div>
+        <h1>To-Do List</h1>
+        <AddTaskForm />
+        <SearchBar query={query} setQuery={setQuery} />
+        <Filter status={statusFilter} setStatus={setStatusFilter} />
+        <TaskList />
+      </div>
+    </TaskProvider>
   );
 }
 
